@@ -1,0 +1,45 @@
+''' 
+Pseudo code for reproducing another image based on the larger sigma 
+value
+
+use this for g():
+
+G(x,y) = \frac{1}{2\pi \sigma^2} e^{-\frac{x^2 + y^2}{2 \sigma^2}}
+
+Questions:
+
+1. How to convert image information to something numerical?
+2. What module to use to create images with scientific python?
+3. How to create image canvas with said module?
+4. How to normalize data? How do pixels relate to voxels? 
+	we at least have measurements for the voxels...
+'''
+
+Pre-step
+1. Generate the images again using the GRIN creator
+
+Pseudo code
+
+# Loop over images, grabbing the pixels in row 1999 from 0 to 2000 and 
+# copying their data into a new array
+
+	for pic in image:
+		for item in range(2000): 
+			read pixel located at [item, 1999] 
+			copy pixel data to array element [pic, item] (this makes rows)
+
+			
+# Calculate the Gaussian filter
+
+	ndimage.gaussian_filter(array, sigma=itsvalue)
+
+
+# Write contents of array to a new image
+
+	# create image of dimensions array rows x array columns somehow?
+	
+	for row in array: 
+		for item in row:
+			image pixel = item
+			
+	draw image or whatever

@@ -1,0 +1,40 @@
+#!/bin/bash -l
+## Lines preceded by "#PBS" are directives for Torque/PBS
+## this line tells Torque the name of the batch job
+## which will show up when you check the queue
+#PBS -N chymera-flatStar
+
+## this line tells Torque which queue to submit to
+## see /INFO/queues.txt for a description of available queues
+#PBS -q fatnodes 
+
+## resource list:
+##   1 node and 32 processors per node
+##   24 hrs
+#PBS -l nodes=1:ppn=32
+#PBS -l walltime=24:00:00
+
+## directory list: change to your pathway
+#PBS -d /home11/rtumblin/chymera-whit/run
+#PBS -o /home11/rtumblin/chymera-whit/run
+#PBS -e /home11/rtumblin/chymera-whit/run
+                                                              1,1           Top
+## email: Change to your email
+##
+#PBS -m ea
+#PBS -M rtumblin@uoregon.edu
+
+# load modules
+# see /INFO/modules-howto.txt for a mini-howto on Modules
+
+module load intel/13.1.1
+
+# set stacksize: may be useful if you get seg faults, otherwise erase 
+ulimit -s unlimited
+limit stacksize unlimited
+#and each thread
+export GOMP_STACKSIZE=1g
+
+# execute program
+cd /your_home/pathway
+./your_executable > outfile 
